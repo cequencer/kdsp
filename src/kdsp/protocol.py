@@ -152,7 +152,7 @@ class KDSCapPacket(KDSPacket):
 		except:
 			# don't worry if we can't get it
 			scapypacket = None
-		return '<KDSCapPacket: radio=%r, packet=%r bytes, scapy=%r>' % (self.radio, len(self.packet), repr(scapypacket))
+		return '<KDSCapPacket: radio=%r, packet=%r bytes, scapy=%s>' % (self.radio, len(self.packet), repr(scapypacket))
 
 
 class KDSProtocol(Protocol):
