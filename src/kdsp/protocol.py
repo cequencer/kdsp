@@ -140,9 +140,19 @@ class KDSCapPacket(KDSPacket):
 		
 		# now parse the rest out as data... the rest is 802.11.
 		self.packet = packet[44:44+packet_len]
-
+	
+	def scapy(self):
+		# pass back an object parsed by scapy
+		from scapy.all import Dot11
+		return Dot11(self.packet)
+		
 	def __repr__(self):
-		return '<KDSCapPacket: radio=%r, packet=%r bytes>' % (self.radio, len(self.packet))
+		try:
+			scapypacket = self.scapy()
+		except:
+			# don't worry if we can't get it
+			scapypacket = None
+		return '<KDSCapPacket: radio=%r, packet=%r bytes, scapy=%r>' % (self.radio, len(self.packet), repr(scapypacket))
 
 
 class KDSProtocol(Protocol):
