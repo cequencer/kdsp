@@ -156,7 +156,7 @@ class KDSCapPacket(KDSPacket):
 
 
 class KDSProtocol(Protocol):
-	def __init__(self, iface=''):
+	def __init__(self):
 		self._buf = ''
 
 	
@@ -179,7 +179,7 @@ class KDSProtocol(Protocol):
 			
 			if sentinel != KISMET_SENTINEL:
 				# drop out now and clear the buffer so we can reset
-				log.warn('Expected sentinel header, got %08X instead.  Dropping buffer.' % sentinel)
+				log.err('Expected sentinel header, got %08X instead.  Dropping buffer.' % sentinel)
 
 				self._buf = ''
 				return
