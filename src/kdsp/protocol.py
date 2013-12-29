@@ -25,6 +25,12 @@ from twisted.python import log
 from twisted.internet import reactor
 from decimal import Decimal
 from struct import unpack
+from datetime import datetime
+from pytz import utc
+try:
+	from scapy.all import Dot11
+except ImportError:
+	Dot11 = None
 
 
 # Constants for the protocol
@@ -143,8 +149,16 @@ class KDSCapPacket(KDSPacket):
 	
 	def scapy(self):
 		# pass back an object parsed by scapy
-		from scapy.all import Dot11
 		return Dot11(self.packet)
+	
+	def tv(self):
+		"""
+		Gets the datetime when this packet was captured.
+		
+		Ignores the 'tv_usec' value from the header (microseconds).
+		"""
+		
+		return datetime.utcfromtimestamp(self.tv_sec).replace(tzinfo=utc)
 		
 	def __repr__(self):
 		try:
