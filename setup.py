@@ -12,6 +12,7 @@ setup(
 	license="LGPL3+",
 	requires=[
 		'Twisted (>=12.0.0)',
+		'pytz',
 	],
 	packages=find_packages('src'),
 	package_dir={'': 'src'},
