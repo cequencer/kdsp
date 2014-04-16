@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="kdsp",
-	version="0.1",
+	version="0.1.0",
 	description="Protocol library for KDSP (Kismet Drone-Server Protocol)",
 	author="Michael Farrell",
 	author_email="micolous@gmail.com",

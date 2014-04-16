@@ -117,6 +117,7 @@ class KDSCapPacket(KDSPacket):
 			# read a drone_capture_sub_radio
 			# find it's length (uint16), this is inclusive of the length value.
 			length = unpack('!H', cap_packet[:2])[0]
+			assert length == 30, 'Invalid KDSCapSubRadio packet, got length %d (expected 30) = %r' % (length, cap_packet[:length])
 			self.radio = KDSCapSubRadio(cap_packet[:length])
 			
 			# shift the packet
