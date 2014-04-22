@@ -1,6 +1,6 @@
 """
 kdsp/protocol.py - Twisted protocol library for Kismet Drone-Server Protocol (KDSP)
-Copyright 2013 Michael Farrell <micolous+git@gmail.com>
+Copyright 2013-2014 Michael Farrell <micolous+git@gmail.com>
 
 This library is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -118,6 +118,7 @@ class KDSCapPacket(KDSPacket):
 			# find it's length (uint16), this is inclusive of the length value.
 			length = unpack('!H', cap_packet[:2])[0]
 			assert length == 30, 'Invalid KDSCapSubRadio packet, got length %d (expected 30) = %r' % (length, cap_packet[:length])
+			assert len(cap_packet) >= length, 'Not enough bytes for KDSCapSubRadio, malformed or incomplete packet? (got %r bytes, expected %r)' % (len(cap_packet), length)
 			self.radio = KDSCapSubRadio(cap_packet[:length])
 			
 			# shift the packet
